@@ -2,34 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>UPI Payment Demo</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
+    body { font-family: Arial, sans-serif; text-align: center; padding: 40px; }
     h2 { color: #333; }
-    button {
-      background: #4CAF50;
-      border: none;
-      padding: 15px 25px;
-      margin: 20px;
+    .btn {
+      display: block;
+      width: 250px;
+      margin: 12px auto;
+      padding: 14px;
       font-size: 18px;
-      border-radius: 8px;
-      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
+      color: white;
     }
-    button:hover { background: #45a049; }
+    .paytm { background: #00baf2; }
+    .phonepe { background: #5f259f; }
+    .gpay { background: #4285f4; }
+    .btn:hover { opacity: 0.9; }
+    .qr { margin-top: 30px; }
   </style>
 </head>
 <body>
-  <h2>Оплата через UPI</h2>
-  <p>Нажмите на кнопку, чтобы оплатить 10 INR</p>
+  <h2>Оплата 10 INR через UPI</h2>
+  <p>Выберите приложение для оплаты:</p>
 
-  <button onclick="window.location.href='upi://pay?pa=r.international@ptyes&pn=MsRegentInternational&am=10.00&cu=INR&mode=02&tn=PaymentToRegentInternational&tr=ORD10TEST'">
-    Оплатить 10 INR
-  </button>
+  <button class="btn paytm" onclick="pay('paytm')">Pay via Paytm</button>
+  <button class="btn phonepe" onclick="pay('phonepe')">Pay via PhonePe</button>
+  <button class="btn gpay" onclick="pay('gpay')">Pay via Google Pay</button>
 
+  <div class="qr">
+    <p>Если кнопки не работают, отсканируйте QR:</p>
+    <img id="qrImage" width="220" height="220">
+  </div>
+
+  <script>
+    function generateTxnId() {
+      return 'ORD-' + Date.now();
+    }
+
+    function buildLink(app) {
+      const pa = "r.international@ptyes";
+      const pn = "MsRegentInternational";
+      const am = "10.00";
+      const cu = "INR";
+      const tn = "Order Payment";
+      const tr = generateTxnId();
+
+      if (app === "paytm") {
+        return `paytmmp://pay?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=${cu}&mode=02&tn=${encodeURIComponent(tn)}&tr=${tr}`;
+      } else if (app === "phonepe") {
+        return `phonepe://pay?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=${cu}&mode=02&tn=${encodeURIComponent(tn)}&tr=${tr}`;
+      } else if (app === "gpay") {
+        return `gpay://upi/pay?pa=${pa}&pn=${encodeURIComponent(pn)}&am=${am}&cu=${cu}&mode=02&tn=${encodeURIComponent(tn)}&tr=${tr}`;
+      }
+    }
+
+    function pay(app) {
+      const link = buildLink(app);
+      window.location.href = link;
+
+      // Обновляем QR для fallback
+      document.getElementById("qrImage").src =
+        "https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=" + encodeURIComponent(link);
+    }
+  </script>
 </body>
 </html>
