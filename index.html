@@ -1,106 +1,140 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Paytm Deep Link • 10 INR</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UPI Deep Links • Paytm / PhonePe / GPay</title>
   <style>
-    :root { --bg:#0f1220; --card:#161a2b; --text:#e8ecff; --muted:#9aa3c7; --accent:#6ea8ff; }
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu}
-    .wrap{max-width:760px;margin:0 auto;padding:24px}
-    .card{background:var(--card);border:1px solid #232844;border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    h1{font-size:24px;margin:0 0 12px}
-    p{margin:8px 0;color:var(--muted)}
-    .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-    .btn{appearance:none;border:0;border-radius:12px;padding:14px 18px;font-weight:600;cursor:pointer}
-    .btn-primary{background:var(--accent);color:#0f1220}
-    .btn-ghost{background:#222846;color:var(--text);border:1px solid #2e3553}
-    code{user-select:all;word-break:break-all}
-    .hint{margin-top:14px;font-size:14px;color:#b6bfdf}
-    .ok{color:#7dffa3}
-    .err{color:#ff9b9b}
-    footer{margin-top:24px;color:#7f89b3;font-size:13px;text-align:center}
+    :root { --bg:#0f1220; --card:#171b2d; --text:#e8ecff; --muted:#9aa3c7; --accent:#6ea8ff; --line:#283052; }
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto}
+    .wrap{max-width:960px;margin:0 auto;padding:28px}
+    h1{margin:0 0 6px;font-size:24px}
+    p{margin:0 0 16px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+    .who{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .tag{font-size:12px;border:1px solid var(--line);padding:2px 8px;border-radius:999px;color:#c7cff4}
+    .vpa{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;color:#cfd6ff}
+    .row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}
+    button{appearance:none;border:1px solid var(--line);background:#1c2240;color:var(--text);padding:10px 12px;border-radius:12px;cursor:pointer}
+    button.primary{background:var(--accent);color:#0f1220;border-color:transparent;font-weight:600}
+    .small{font-size:13px;color:#b6bfdf;margin-top:8px}
+    .ok{color:#7dffa3}.err{color:#ff9b9b}
+    footer{margin-top:20px;color:#7f89b3;font-size:13px;text-align:center}
+    code{word-break:break-all}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card">
-      <h1>Оплата в Paytm (10 INR)</h1>
-      <p>Нажми кнопку ниже на устройстве с Android/Paytm.</p>
+    <h1>UPI Deep Links</h1>
+    <p>Нажмите нужную кнопку на Android-устройстве с установленными Paytm / PhonePe / GPay. Есть копирование ссылок на случай, если открытие заблокировано браузером.</p>
 
-      <!-- ТВОЙ ДИПЛИНК -->
-      <p><strong>Deep link:</strong><br>
-        <code id="deeplink">
-          paytmmp://cash_wallet?pa=r.international@ptyes&pn=MsRegentInternational&tn=Order%20Payment&am=10.00&cu=INR&featuretype=money_transfer&tr=ORD-1759138219046
-        </code>
-      </p>
+    <div id="status" class="small">Готово.</div>
 
-      <div class="row">
-        <button class="btn btn-primary" id="open">Открыть в Paytm</button>
-        <button class="btn btn-ghost" id="copy">Скопировать ссылку</button>
+    <div class="grid">
+
+      <!-- Recipient 1: r.international@ptyes / paradoks -->
+      <div class="card">
+        <div class="who">
+          <strong>paradoks</strong>
+          <span class="tag">10 INR</span>
+        </div>
+        <div class="vpa">VPA: <code>r.international@ptyes</code></div>
+        <div class="row">
+          <button class="primary" data-link="paytmmp://cash_wallet?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1A&featuretype=money_transfer">Paytm 0x1A</button>
+          <button data-link="phonepe://pay?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1B">PhonePe 0x1B</button>
+          <button data-link="tez://upi/pay?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1C">GPay 0x1C</button>
+          <button data-copy="paytmmp://cash_wallet?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1A&featuretype=money_transfer">Копировать Paytm</button>
+          <button data-copy="phonepe://pay?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1B">Копировать PhonePe</button>
+          <button data-copy="tez://upi/pay?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1C">Копировать GPay</button>
+        </div>
+        <div class="small">Комменты: 0x1A / 0x1B / 0x1C</div>
       </div>
 
-      <div class="hint" id="status">Готово к открытию. Если ничего не произошло — см. подсказку ниже.</div>
+      <!-- Recipient 2: 9006407046@uco / Aly -->
+      <div class="card">
+        <div class="who">
+          <strong>Aly</strong>
+          <span class="tag">10 INR</span>
+        </div>
+        <div class="vpa">VPA: <code>9006407046@uco</code></div>
+        <div class="row">
+          <button class="primary" data-link="paytmmp://cash_wallet?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2A&featuretype=money_transfer">Paytm 0x2A</button>
+          <button data-link="phonepe://pay?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2B">PhonePe 0x2B</button>
+          <button data-link="tez://upi/pay?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2C">GPay 0x2C</button>
+          <button data-copy="paytmmp://cash_wallet?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2A&featuretype=money_transfer">Копировать Paytm</button>
+          <button data-copy="phonepe://pay?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2B">Копировать PhonePe</button>
+          <button data-copy="tez://upi/pay?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2C">Копировать GPay</button>
+        </div>
+        <div class="small">Комменты: 0x2A / 0x2B / 0x2C</div>
+      </div>
 
-      <details class="hint" style="margin-top:18px">
-        <summary>Если не открывается</summary>
-        <ul>
-          <li>Открой страницу на <b>эмуляторе/телефоне Android</b> с установленным Paytm.</li>
-          <li>Убедись, что в браузере разрешены открытия приложений по ссылкам (Open supported links).</li>
-          <li>Скопируй диплинк и вставь в адресную строку Chrome → <kbd>Enter</kbd>.</li>
-        </ul>
-      </details>
+      <!-- Recipient 3: 9899924451@pthdfc / Tatar -->
+      <div class="card">
+        <div class="who">
+          <strong>Tatar</strong>
+          <span class="tag">10 INR</span>
+        </div>
+        <div class="vpa">VPA: <code>9899924451@pthdfc</code></div>
+        <div class="row">
+          <button class="primary" data-link="paytmmp://cash_wallet?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3A&featuretype=money_transfer">Paytm 0x3A</button>
+          <button data-link="phonepe://pay?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3B">PhonePe 0x3B</button>
+          <button data-link="tez://upi/pay?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3C">GPay 0x3C</button>
+          <button data-copy="paytmmp://cash_wallet?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3A&featuretype=money_transfer">Копировать Paytm</button>
+          <button data-copy="phonepe://pay?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3B">Копировать PhonePe</button>
+          <button data-copy="tez://upi/pay?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3C">Копировать GPay</button>
+        </div>
+        <div class="small">Комменты: 0x3A / 0x3B / 0x3C</div>
+      </div>
+
     </div>
-    <footer>© Demo • Paytm deep link opener</footer>
+
+    <footer>© Demo • UPI Deep Links</footer>
   </div>
 
   <script>
-    const link = "paytmmp://cash_wallet?pa=r.international@ptyes&pn=MsRegentInternational&tn=Order%20Payment&am=10.00&cu=INR&featuretype=money_transfer&tr=ORD-1759138219046";
-    const openBtn = document.getElementById('open');
-    const copyBtn = document.getElementById('copy');
-    const status = document.getElementById('status');
-    const code = document.getElementById('deeplink');
+    const statusEl = document.getElementById('status');
 
-    function isAndroid() { return /Android/i.test(navigator.userAgent); }
+    function setStatus(msg, ok=false) {
+      statusEl.textContent = msg;
+      statusEl.className = 'small ' + (ok ? 'ok' : '');
+    }
 
-    openBtn.addEventListener('click', () => {
-      status.textContent = "Пробую открыть Paytm…";
-      // Пытаемся открыть приложение
-      const started = Date.now();
-      window.location.href = link;
+    function isAndroid(){ return /Android/i.test(navigator.userAgent); }
 
-      // Если браузер не передал в приложение, покажем подсказку
-      setTimeout(() => {
-        const elapsed = Date.now() - started;
-        if (elapsed < 1800) {
-          status.innerHTML = "Похоже, не открылось. " +
-            (isAndroid()
-              ? "Скопируй ссылку и вставь в Chrome вручную."
-              : "Открой эту страницу на Android с установленным Paytm.");
-          status.className = "hint err";
-        } else {
-          status.textContent = "Открыто.";
-          status.className = "hint ok";
-        }
-      }, 1500);
+    // Открытие приложений
+    document.querySelectorAll('button[data-link]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const url = btn.getAttribute('data-link');
+        setStatus('Пробую открыть приложение…');
+        const started = Date.now();
+        window.location.href = url;
+
+        setTimeout(() => {
+          const elapsed = Date.now() - started;
+          if (elapsed < 1600) {
+            setStatus(isAndroid()
+              ? 'Похоже, не открылось. Скопируйте ссылку и вставьте в Chrome вручную.'
+              : 'Откройте страницу на Android-устройстве с установленным приложением.');
+          } else {
+            setStatus('Открыто.', true);
+          }
+        }, 1200);
+      });
     });
 
-    copyBtn.addEventListener('click', async () => {
+    // Копирование диплинков
+    async function copyText(text){
       try {
-        await navigator.clipboard.writeText(link);
-        status.textContent = "Ссылка скопирована в буфер обмена.";
-        status.className = "hint ok";
+        await navigator.clipboard.writeText(text);
+        setStatus('Ссылка скопирована в буфер обмена.', true);
       } catch (e) {
-        // fallback
-        const r = document.createRange();
-        r.selectNode(code);
-        const sel = window.getSelection();
-        sel.removeAllRanges(); sel.addRange(r);
-        const ok = document.execCommand('copy');
-        sel.removeAllRanges();
-        status.textContent = ok ? "Ссылка скопирована." : "Не удалось скопировать.";
-        status.className = "hint " + (ok ? "ok" : "err");
+        setStatus('Не удалось скопировать. Выделите и скопируйте вручную.');
       }
+    }
+
+    document.querySelectorAll('button[data-copy]').forEach(btn => {
+      btn.addEventListener('click', () => copyText(btn.getAttribute('data-copy')));
     });
   </script>
 </body>
