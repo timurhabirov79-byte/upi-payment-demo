@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>UPI Deep Links • Paytm / PhonePe / GPay</title>
+  <title>UPI Deep Links • Forced PhonePe & GPay</title>
   <style>
-    :root { --bg:#0f1220; --card:#171b2d; --text:#e8ecff; --muted:#9aa3c7; --accent:#6ea8ff; --line:#283052; }
+    :root { --bg:#0f1220; --card:#171b2d; --text:#e8ecff; --muted:#9aa3c7; --accent:#6ea8ff; --line:#283052 }
     *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto}
     .wrap{max-width:960px;margin:0 auto;padding:28px}
     h1{margin:0 0 6px;font-size:24px}
@@ -14,127 +14,143 @@
     .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
     .who{display:flex;align-items:center;gap:10px;margin-bottom:8px}
     .tag{font-size:12px;border:1px solid var(--line);padding:2px 8px;border-radius:999px;color:#c7cff4}
-    .vpa{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;color:#cfd6ff}
+    .vpa{font-family:ui-monospace,Menlo,Consolas,monospace;color:#cfd6ff}
     .row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}
     button{appearance:none;border:1px solid var(--line);background:#1c2240;color:var(--text);padding:10px 12px;border-radius:12px;cursor:pointer}
     button.primary{background:var(--accent);color:#0f1220;border-color:transparent;font-weight:600}
     .small{font-size:13px;color:#b6bfdf;margin-top:8px}
     .ok{color:#7dffa3}.err{color:#ff9b9b}
     footer{margin-top:20px;color:#7f89b3;font-size:13px;text-align:center}
-    code{word-break:break-all}
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>UPI Deep Links</h1>
-    <p>Нажмите нужную кнопку на Android-устройстве с установленными Paytm / PhonePe / GPay. Есть копирование ссылок на случай, если открытие заблокировано браузером.</p>
-
+    <p>Кнопки ниже открывают Paytm / PhonePe / GPay. Для PhonePe и GPay используется <b>intent://</b> (принудительное открытие) + fallback на <b>upi://pay</b>.</p>
     <div id="status" class="small">Готово.</div>
 
     <div class="grid">
 
       <!-- Recipient 1: r.international@ptyes / paradoks -->
       <div class="card">
-        <div class="who">
-          <strong>paradoks</strong>
-          <span class="tag">10 INR</span>
-        </div>
-        <div class="vpa">VPA: <code>r.international@ptyes</code></div>
+        <div class="who"><strong>paradoks</strong><span class="tag">10 INR</span></div>
+        <div class="vpa">VPA: r.international@ptyes</div>
         <div class="row">
-          <button class="primary" data-link="paytmmp://cash_wallet?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1A&featuretype=money_transfer">Paytm 0x1A</button>
-          <button data-link="phonepe://pay?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1B">PhonePe 0x1B</button>
-          <button data-link="tez://upi/pay?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1C">GPay 0x1C</button>
-          <button data-copy="paytmmp://cash_wallet?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1A&featuretype=money_transfer">Копировать Paytm</button>
-          <button data-copy="phonepe://pay?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1B">Копировать PhonePe</button>
-          <button data-copy="tez://upi/pay?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1C">Копировать GPay</button>
+          <!-- Paytm -->
+          <button class="primary"
+                  data-open="paytmmp://cash_wallet?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1A&featuretype=money_transfer">
+            Paytm 0x1A
+          </button>
+          <!-- PhonePe (intent) -->
+          <button
+            data-open="intent://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1B#Intent;scheme=upi;package=com.phonepe.app;end"
+            data-fallback="upi://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1B">
+            PhonePe 0x1B
+          </button>
+          <!-- GPay (intent) -->
+          <button
+            data-open="intent://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1C#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end"
+            data-fallback="upi://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1C">
+            GPay 0x1C
+          </button>
         </div>
-        <div class="small">Комменты: 0x1A / 0x1B / 0x1C</div>
       </div>
 
       <!-- Recipient 2: 9006407046@uco / Aly -->
       <div class="card">
-        <div class="who">
-          <strong>Aly</strong>
-          <span class="tag">10 INR</span>
-        </div>
-        <div class="vpa">VPA: <code>9006407046@uco</code></div>
+        <div class="who"><strong>Aly</strong><span class="tag">10 INR</span></div>
+        <div class="vpa">VPA: 9006407046@uco</div>
         <div class="row">
-          <button class="primary" data-link="paytmmp://cash_wallet?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2A&featuretype=money_transfer">Paytm 0x2A</button>
-          <button data-link="phonepe://pay?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2B">PhonePe 0x2B</button>
-          <button data-link="tez://upi/pay?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2C">GPay 0x2C</button>
-          <button data-copy="paytmmp://cash_wallet?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2A&featuretype=money_transfer">Копировать Paytm</button>
-          <button data-copy="phonepe://pay?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2B">Копировать PhonePe</button>
-          <button data-copy="tez://upi/pay?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2C">Копировать GPay</button>
+          <button class="primary"
+                  data-open="paytmmp://cash_wallet?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2A&featuretype=money_transfer">
+            Paytm 0x2A
+          </button>
+          <button
+            data-open="intent://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2B#Intent;scheme=upi;package=com.phonepe.app;end"
+            data-fallback="upi://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2B">
+            PhonePe 0x2B
+          </button>
+          <button
+            data-open="intent://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2C#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end"
+            data-fallback="upi://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2C">
+            GPay 0x2C
+          </button>
         </div>
-        <div class="small">Комменты: 0x2A / 0x2B / 0x2C</div>
       </div>
 
       <!-- Recipient 3: 9899924451@pthdfc / Tatar -->
       <div class="card">
-        <div class="who">
-          <strong>Tatar</strong>
-          <span class="tag">10 INR</span>
-        </div>
-        <div class="vpa">VPA: <code>9899924451@pthdfc</code></div>
+        <div class="who"><strong>Tatar</strong><span class="tag">10 INR</span></div>
+        <div class="vpa">VPA: 9899924451@pthdfc</div>
         <div class="row">
-          <button class="primary" data-link="paytmmp://cash_wallet?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3A&featuretype=money_transfer">Paytm 0x3A</button>
-          <button data-link="phonepe://pay?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3B">PhonePe 0x3B</button>
-          <button data-link="tez://upi/pay?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3C">GPay 0x3C</button>
-          <button data-copy="paytmmp://cash_wallet?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3A&featuretype=money_transfer">Копировать Paytm</button>
-          <button data-copy="phonepe://pay?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3B">Копировать PhonePe</button>
-          <button data-copy="tez://upi/pay?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3C">Копировать GPay</button>
+          <button class="primary"
+                  data-open="paytmmp://cash_wallet?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3A&featuretype=money_transfer">
+            Paytm 0x3A
+          </button>
+          <button
+            data-open="intent://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3B#Intent;scheme=upi;package=com.phonepe.app;end"
+            data-fallback="upi://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3B">
+            PhonePe 0x3B
+          </button>
+          <button
+            data-open="intent://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3C#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end"
+            data-fallback="upi://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3C">
+            GPay 0x3C
+          </button>
         </div>
-        <div class="small">Комменты: 0x3A / 0x3B / 0x3C</div>
       </div>
 
     </div>
 
-    <footer>© Demo • UPI Deep Links</footer>
+    <footer>© Demo • Forced intents for PhonePe & GPay</footer>
   </div>
 
   <script>
     const statusEl = document.getElementById('status');
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const isChrome = /Chrome/i.test(navigator.userAgent);
 
     function setStatus(msg, ok=false) {
       statusEl.textContent = msg;
       statusEl.className = 'small ' + (ok ? 'ok' : '');
     }
 
-    function isAndroid(){ return /Android/i.test(navigator.userAgent); }
-
-    // Открытие приложений
-    document.querySelectorAll('button[data-link]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const url = btn.getAttribute('data-link');
-        setStatus('Пробую открыть приложение…');
-        const started = Date.now();
-        window.location.href = url;
-
-        setTimeout(() => {
-          const elapsed = Date.now() - started;
-          if (elapsed < 1600) {
-            setStatus(isAndroid()
-              ? 'Похоже, не открылось. Скопируйте ссылку и вставьте в Chrome вручную.'
-              : 'Откройте страницу на Android-устройстве с установленным приложением.');
-          } else {
-            setStatus('Открыто.', true);
-          }
-        }, 1200);
-      });
-    });
-
-    // Копирование диплинков
-    async function copyText(text){
-      try {
-        await navigator.clipboard.writeText(text);
-        setStatus('Ссылка скопирована в буфер обмена.', true);
-      } catch (e) {
-        setStatus('Не удалось скопировать. Выделите и скопируйте вручную.');
+    // Пытаемся: INTENT -> (если не получилось быстро) -> UPI fallback
+    function openWithFallback(intentUrl, fallbackUrl){
+      if (!(isAndroid && isChrome)) {
+        // На iOS/desktop intent не сработает — сразу показываем подсказку
+        window.location.href = fallbackUrl || intentUrl;
+        setStatus('Откройте страницу на Android с установленным приложением.');
+        return;
       }
+      const started = Date.now();
+      // 1) Пытаемся открыть intent:// (PhonePe/GPay)
+      window.location.href = intentUrl;
+
+      // 2) Если браузер вернулся слишком быстро — пробуем upi://pay как fallback
+      setTimeout(() => {
+        const elapsed = Date.now() - started;
+        if (elapsed < 1200 && fallbackUrl) {
+          window.location.href = fallbackUrl;
+          setStatus('Пробую fallback на upi://pay…');
+        } else {
+          setStatus('Открыто.', true);
+        }
+      }, 900);
     }
 
-    document.querySelectorAll('button[data-copy]').forEach(btn => {
-      btn.addEventListener('click', () => copyText(btn.getAttribute('data-copy')));
+    document.querySelectorAll('button[data-open]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const url = btn.getAttribute('data-open');
+        const fallback = btn.getAttribute('data-fallback'); // может быть пустым (для Paytm)
+        if (url.startsWith('intent://')) {
+          openWithFallback(url, fallback);
+        } else {
+          // Paytm и прочие обычные диплинки
+          window.location.href = url;
+          setStatus('Пробую открыть приложение…');
+        }
+      });
     });
   </script>
 </body>
