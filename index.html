@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UPI Payment Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    h2 { color: #333; }
+    button {
+      background: #4CAF50;
+      border: none;
+      padding: 15px 25px;
+      margin: 20px;
+      font-size: 18px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover { background: #45a049; }
+  </style>
+</head>
+<body>
+  <h2>Оплата через UPI</h2>
+  <p>Нажмите на кнопку, чтобы оплатить 10 INR</p>
+
+  <button onclick="window.location.href='upi://pay?pa=r.international@ptyes&pn=MsRegentInternational&am=10.00&cu=INR&mode=02&tn=PaymentToRegentInternational&tr=ORD10TEST'">
+    Оплатить 10 INR
+  </button>
+
+</body>
+</html>
