@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>UPI Deep Links • Forced PhonePe & GPay</title>
+  <title>UPI Deep Links • Strict PhonePe</title>
   <style>
     :root { --bg:#0f1220; --card:#171b2d; --text:#e8ecff; --muted:#9aa3c7; --accent:#6ea8ff; --line:#283052 }
     *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto}
@@ -26,75 +26,75 @@
 <body>
   <div class="wrap">
     <h1>UPI Deep Links</h1>
-    <p>Кнопки ниже открывают Paytm / PhonePe / GPay. Для PhonePe и GPay используется <b>intent://</b> (принудительное открытие) + fallback на <b>upi://pay</b>.</p>
+    <p>PhonePe открывается строго через <b>scheme=phonepe</b> (без upi:// fallback). GPay — intent c <b>scheme=upi</b>. Paytm — нативный deep link.</p>
     <div id="status" class="small">Готово.</div>
 
     <div class="grid">
 
-      <!-- Recipient 1: r.international@ptyes / paradoks -->
+      <!-- r.international@ptyes / paradoks -->
       <div class="card">
         <div class="who"><strong>paradoks</strong><span class="tag">10 INR</span></div>
         <div class="vpa">VPA: r.international@ptyes</div>
         <div class="row">
           <!-- Paytm -->
           <button class="primary"
-                  data-open="paytmmp://cash_wallet?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1A&featuretype=money_transfer">
+            data-open="paytmmp://cash_wallet?pa=r.international@ptyes&pn=paradoks&am=10&cu=INR&tn=0x1A&featuretype=money_transfer">
             Paytm 0x1A
           </button>
-          <!-- PhonePe (intent) -->
+          <!-- PhonePe STRICT (no upi fallback) -->
           <button
-            data-open="intent://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1B#Intent;scheme=upi;package=com.phonepe.app;end"
-            data-fallback="upi://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1B">
+            data-open="intent://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1B#Intent;scheme=phonepe;package=com.phonepe.app;end"
+            data-fallback-phonepe="phonepe://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1B">
             PhonePe 0x1B
           </button>
-          <!-- GPay (intent) -->
+          <!-- GPay -->
           <button
             data-open="intent://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1C#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end"
-            data-fallback="upi://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1C">
+            data-fallback-upi="upi://pay?pa=r.international@ptyes&pn=paradoks&am=10.00&cu=INR&tn=0x1C">
             GPay 0x1C
           </button>
         </div>
       </div>
 
-      <!-- Recipient 2: 9006407046@uco / Aly -->
+      <!-- 9006407046@uco / Aly -->
       <div class="card">
         <div class="who"><strong>Aly</strong><span class="tag">10 INR</span></div>
         <div class="vpa">VPA: 9006407046@uco</div>
         <div class="row">
           <button class="primary"
-                  data-open="paytmmp://cash_wallet?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2A&featuretype=money_transfer">
+            data-open="paytmmp://cash_wallet?pa=9006407046@uco&pn=Aly&am=10&cu=INR&tn=0x2A&featuretype=money_transfer">
             Paytm 0x2A
           </button>
           <button
-            data-open="intent://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2B#Intent;scheme=upi;package=com.phonepe.app;end"
-            data-fallback="upi://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2B">
+            data-open="intent://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2B#Intent;scheme=phonepe;package=com.phonepe.app;end"
+            data-fallback-phonepe="phonepe://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2B">
             PhonePe 0x2B
           </button>
           <button
             data-open="intent://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2C#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end"
-            data-fallback="upi://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2C">
+            data-fallback-upi="upi://pay?pa=9006407046@uco&pn=Aly&am=10.00&cu=INR&tn=0x2C">
             GPay 0x2C
           </button>
         </div>
       </div>
 
-      <!-- Recipient 3: 9899924451@pthdfc / Tatar -->
+      <!-- 9899924451@pthdfc / Tatar -->
       <div class="card">
         <div class="who"><strong>Tatar</strong><span class="tag">10 INR</span></div>
         <div class="vpa">VPA: 9899924451@pthdfc</div>
         <div class="row">
           <button class="primary"
-                  data-open="paytmmp://cash_wallet?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3A&featuretype=money_transfer">
+            data-open="paytmmp://cash_wallet?pa=9899924451@pthdfc&pn=Tatar&am=10&cu=INR&tn=0x3A&featuretype=money_transfer">
             Paytm 0x3A
           </button>
           <button
-            data-open="intent://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3B#Intent;scheme=upi;package=com.phonepe.app;end"
-            data-fallback="upi://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3B">
+            data-open="intent://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3B#Intent;scheme=phonepe;package=com.phonepe.app;end"
+            data-fallback-phonepe="phonepe://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3B">
             PhonePe 0x3B
           </button>
           <button
             data-open="intent://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3C#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end"
-            data-fallback="upi://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3C">
+            data-fallback-upi="upi://pay?pa=9899924451@pthdfc&pn=Tatar&am=10.00&cu=INR&tn=0x3C">
             GPay 0x3C
           </button>
         </div>
@@ -102,53 +102,65 @@
 
     </div>
 
-    <footer>© Demo • Forced intents for PhonePe & GPay</footer>
+    <footer>© Demo • Strict PhonePe (no upi fallback)</footer>
   </div>
 
   <script>
     const statusEl = document.getElementById('status');
     const isAndroid = /Android/i.test(navigator.userAgent);
-    const isChrome = /Chrome/i.test(navigator.userAgent);
+    const isChrome  = /Chrome/i.test(navigator.userAgent);
 
-    function setStatus(msg, ok=false) {
+    function setStatus(msg, ok=false){
       statusEl.textContent = msg;
       statusEl.className = 'small ' + (ok ? 'ok' : '');
     }
 
-    // Пытаемся: INTENT -> (если не получилось быстро) -> UPI fallback
-    function openWithFallback(intentUrl, fallbackUrl){
+    // INTENT helpers
+    function openIntentStrict(primary, fbPhonePe, fbUpi){
+      const t0 = Date.now();
+
+      // Если не Android/Chrome: используем только профильный fallback
       if (!(isAndroid && isChrome)) {
-        // На iOS/desktop intent не сработает — сразу показываем подсказку
-        window.location.href = fallbackUrl || intentUrl;
-        setStatus('Откройте страницу на Android с установленным приложением.');
+        if (fbPhonePe) { window.location.href = fbPhonePe; }
+        else if (fbUpi) { window.location.href = fbUpi; }
+        else { window.location.href = primary; }
+        setStatus('Откройте на Android с установленным приложением.');
         return;
       }
-      const started = Date.now();
-      // 1) Пытаемся открыть intent:// (PhonePe/GPay)
-      window.location.href = intentUrl;
 
-      // 2) Если браузер вернулся слишком быстро — пробуем upi://pay как fallback
+      // 1) Пытаемся открыть intent://
+      window.location.href = primary;
+
+      // 2) Если возврат слишком быстро — PhonePe: только phonepe://, GPay: только upi://
       setTimeout(() => {
-        const elapsed = Date.now() - started;
-        if (elapsed < 1200 && fallbackUrl) {
-          window.location.href = fallbackUrl;
-          setStatus('Пробую fallback на upi://pay…');
+        const dt = Date.now() - t0;
+        if (dt < 900) {
+          if (fbPhonePe) {
+            window.location.href = fbPhonePe;            // строго PhonePe fallback
+            setStatus('Fallback: phonepe://…');
+          } else if (fbUpi) {
+            window.location.href = fbUpi;                 // GPay fallback на upi://
+            setStatus('Fallback: upi://…');
+          } else {
+            setStatus('Не удалось открыть приложение.');
+          }
         } else {
           setStatus('Открыто.', true);
         }
-      }, 900);
+      }, 700);
     }
 
     document.querySelectorAll('button[data-open]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const url = btn.getAttribute('data-open');
-        const fallback = btn.getAttribute('data-fallback'); // может быть пустым (для Paytm)
-        if (url.startsWith('intent://')) {
-          openWithFallback(url, fallback);
+        const primary = btn.getAttribute('data-open');
+        const fbPhone = btn.getAttribute('data-fallback-phonepe'); // только для PhonePe
+        const fbUpi   = btn.getAttribute('data-fallback-upi');     // только для GPay
+
+        if (primary.startsWith('intent://')) {
+          openIntentStrict(primary, fbPhone, fbUpi);
         } else {
-          // Paytm и прочие обычные диплинки
-          window.location.href = url;
-          setStatus('Пробую открыть приложение…');
+          window.location.href = primary; // Paytm и пр.
+          setStatus('Пробую открыть…');
         }
       });
     });
